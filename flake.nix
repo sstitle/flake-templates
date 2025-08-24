@@ -1,15 +1,70 @@
 {
-  description = "A very basic flake";
+  description = "Nix flake templates for development environments";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, flake-utils, treefmt-nix }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        # Development shell for working on the templates themselves
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            git
+            nixpkgs-fmt
+            treefmt
+            direnv
+            nix-direnv
+          ];
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+          shellHook = ''
+            echo "🛠️  Template development environment"
+            echo "Use 'nix flake init -t github:yourusername/flake-templates' to test templates"
+          '';
+        };
 
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+        # Formatter for this flake
+        formatter = pkgs.nixpkgs-fmt;
+      }
+    ) // {
+      # Templates that can be used with 'nix flake init'
+      templates = {
+        default = {
+          path = ./templates/default;
+          description = "Development environment with nickel, mask, and treefmt";
+          welcomeText = ''
+            # Welcome to your new Nix development environment!
 
-  };
+            This template provides:
+            - Nickel configuration language
+            - Mask task runner  
+            - Treefmt code formatter
+            - Automatic environment loading with direnv
+
+            Get started:
+            1. Run `direnv allow` (if you have direnv installed)
+            2. Or run `nix develop` to enter the development shell
+            3. Run `mask --help` to see available tasks
+            4. Run `treefmt` to format your code
+
+            Happy coding! 🚀
+          '';
+        };
+
+        # You can add more templates here in the future
+        # minimal = {
+        #   path = ./templates/minimal;
+        #   description = "Minimal Nix development environment";
+        # };
+      };
+
+      # Default template
+      defaultTemplate = self.templates.default;
+    };
 }
