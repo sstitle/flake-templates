@@ -64,7 +64,6 @@
         # };
       };
 
-      # Default template
-      defaultTemplate = self.templates.default;
+
     };
 }
