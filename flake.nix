@@ -7,8 +7,15 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, treefmt-nix }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      treefmt-nix,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -32,7 +39,8 @@
         # Formatter for this flake
         formatter = pkgs.nixpkgs-fmt;
       }
-    ) // {
+    )
+    // {
       # Templates that can be used with 'nix flake init'
       templates = {
         default = {
@@ -43,13 +51,14 @@
 
             This template provides:
             - Nickel configuration language
-            - Mask task runner  
+            - Mask task runner
             - Treefmt code formatter
             - Automatic environment loading with direnv
 
+            Make sure you have "direnv" installed in your NixOS configuration.
+
             Get started:
             1. Run `direnv allow` (if you have direnv installed)
-            2. Or run `nix develop` to enter the development shell
             3. Run `mask --help` to see available tasks
             4. Run `treefmt` to format your code
 
@@ -63,7 +72,6 @@
         #   description = "Minimal Nix development environment";
         # };
       };
-
 
     };
 }
