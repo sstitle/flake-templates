@@ -12,15 +12,12 @@ A collection of Nix flake templates for quickly bootstrapping development enviro
     - [Getting Started](#getting-started)
   - [Template Features](#template-features)
     - [Development Shell](#development-shell)
-    - [Task Automation](#task-automation)
     - [Code Formatting](#code-formatting)
     - [Direnv Integration](#direnv-integration)
   - [Development](#development)
     - [Testing Templates](#testing-templates)
   - [Repository Structure](#repository-structure)
   - [Adding New Templates](#adding-new-templates)
-  - [Contributing](#contributing)
-  - [License](#license)
   - [Related Projects](#related-projects)
 
 <!-- mdformat-toc end -->
@@ -47,14 +44,14 @@ Create a new project with the default template:
 # Create a new directory and initialize with the template
 mkdir my-new-project
 cd my-new-project
-nix flake init -t github:yourusername/flake-templates
+nix flake init -t github:sstitle/flake-templates
 ```
 
 Or initialize in an existing directory:
 
 ```bash
 # In your existing project directory
-nix flake init -t github:yourusername/flake-templates
+nix flake init -t github:sstitle/flake-templates
 ```
 
 ### Getting Started
@@ -98,27 +95,11 @@ The template includes a comprehensive development shell with:
 - Treefmt formatter
 - Git and direnv tools
 - Helpful shell hook with usage information
-
-### Task Automation
-
-Pre-configured mask tasks for common operations:
-
-- `mask dev` - Start development environment
-- `mask build` - Build the project
-- `mask format` - Format all code
-- `mask check` - Run all checks
-- `mask clean` - Clean build artifacts
-- `mask update` - Update dependencies
+- Mask file for convenient scripting
 
 ### Code Formatting
 
-Treefmt configuration supporting multiple languages:
-
-- Nix (nixpkgs-fmt)
-- Markdown (mdformat)
-- YAML (yamlfmt)
-- JSON (jsonfmt)
-- Shell scripts (shfmt)
+Treefmt configuration supporting multiple languages, add to `treefmt.nix` to add more languages.
 
 ### Direnv Integration
 
@@ -129,7 +110,7 @@ Automatic environment loading with `.envrc` configuration for seamless developme
 To work on these templates:
 
 ```bash
-git clone https://github.com/yourusername/flake-templates
+git clone https://github.com/sstitle/flake-templates
 cd flake-templates
 nix develop
 ```
@@ -182,18 +163,6 @@ templates = {
   };
 };
 ```
-
-## Contributing
-
-1. Fork the repository
-1. Create a feature branch
-1. Add your template or improvements
-1. Test thoroughly
-1. Submit a pull request
-
-## License
-
-[Add your license here]
 
 ## Related Projects
 

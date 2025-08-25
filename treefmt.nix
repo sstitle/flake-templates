@@ -17,8 +17,7 @@
           mdformat-gfm
           # keep-sorted end
           (mdformat-toc.overrideAttrs {
-            # Needed to patch unit test that is failing otherwise
-            # keep-sorted start
+            # Needed to patch unit test that is failing otherwise - keep-sorted start
             doCheck = false;
             doInstallCheck = false;
             meta.broken = false;
