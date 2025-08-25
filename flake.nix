@@ -18,25 +18,9 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./templates/default/treefmt.nix;
       in
       {
-        # Development shell for working on the templates themselves
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            git
-            nixpkgs-fmt
-            treefmt
-            direnv
-            nix-direnv
-          ];
-
-          shellHook = ''
-            echo "🛠️  Template development environment"
-            echo "Use 'nix flake init -t github:sstitle/flake-templates' to test templates"
-            echo "Run 'nix fmt' to format all files."
-          '';
-        };
 
         # for `nix fmt`
         formatter = treefmtEval.config.build.wrapper;
