@@ -2,10 +2,35 @@
 
 A collection of Nix flake templates for quickly bootstrapping development environments.
 
+<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
+
+- [Nix Flake Templates](#nix-flake-templates)
+  - [Available Templates](#available-templates)
+    - [Default Template](#default-template)
+  - [Usage](#usage)
+    - [Using the Template](#using-the-template)
+    - [Getting Started](#getting-started)
+  - [Template Features](#template-features)
+    - [Development Shell](#development-shell)
+    - [Task Automation](#task-automation)
+    - [Code Formatting](#code-formatting)
+    - [Direnv Integration](#direnv-integration)
+  - [Development](#development)
+    - [Testing Templates](#testing-templates)
+  - [Repository Structure](#repository-structure)
+  - [Adding New Templates](#adding-new-templates)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Related Projects](#related-projects)
+
+<!-- mdformat-toc end -->
+
 ## Available Templates
 
 ### Default Template
+
 A comprehensive development environment featuring:
+
 - **Nickel**: Configuration language for maintainable configs
 - **Mask**: Task runner for automating development workflows
 - **Treefmt**: Multi-language code formatter
@@ -37,21 +62,25 @@ nix flake init -t github:yourusername/flake-templates
 Once you've initialized a project with the template:
 
 1. **Enter the development environment:**
+
    ```bash
    nix develop
    ```
 
-2. **Or use direnv for automatic loading:**
+1. **Or use direnv for automatic loading:**
+
    ```bash
    direnv allow
    ```
 
-3. **View available tasks:**
+1. **View available tasks:**
+
    ```bash
    mask --help
    ```
 
-4. **Format your code:**
+1. **Format your code:**
+
    ```bash
    treefmt
    # or
@@ -61,7 +90,9 @@ Once you've initialized a project with the template:
 ## Template Features
 
 ### Development Shell
+
 The template includes a comprehensive development shell with:
+
 - Nickel configuration language
 - Mask task runner
 - Treefmt formatter
@@ -69,7 +100,9 @@ The template includes a comprehensive development shell with:
 - Helpful shell hook with usage information
 
 ### Task Automation
+
 Pre-configured mask tasks for common operations:
+
 - `mask dev` - Start development environment
 - `mask build` - Build the project
 - `mask format` - Format all code
@@ -78,7 +111,9 @@ Pre-configured mask tasks for common operations:
 - `mask update` - Update dependencies
 
 ### Code Formatting
+
 Treefmt configuration supporting multiple languages:
+
 - Nix (nixpkgs-fmt)
 - Markdown (mdformat)
 - YAML (yamlfmt)
@@ -86,6 +121,7 @@ Treefmt configuration supporting multiple languages:
 - Shell scripts (shfmt)
 
 ### Direnv Integration
+
 Automatic environment loading with `.envrc` configuration for seamless development workflow.
 
 ## Development
@@ -129,16 +165,17 @@ nix develop
 ## Adding New Templates
 
 1. Create a new directory under `templates/`
-2. Add your template files
-3. Update the main `flake.nix` to include the new template
-4. Commit your changes
-5. Test the template
+1. Add your template files
+1. Update the main `flake.nix` to include the new template
+1. Commit your changes
+1. Test the template
 
 Example:
+
 ```nix
 templates = {
   default = { /* existing template */ };
-  
+
   my-new-template = {
     path = ./templates/my-new-template;
     description = "My custom development environment";
@@ -149,10 +186,10 @@ templates = {
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Add your template or improvements
-4. Test thoroughly
-5. Submit a pull request
+1. Create a feature branch
+1. Add your template or improvements
+1. Test thoroughly
+1. Submit a pull request
 
 ## License
 

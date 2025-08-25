@@ -2,7 +2,6 @@
 
 This is a [mask](https://github.com/jacobdeichert/mask) task runner file.
 
-
 ## hello
 
 > This is an example command you can run with `mask hello`

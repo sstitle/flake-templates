@@ -18,6 +18,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {
         # Development shell for working on the templates themselves
@@ -32,12 +33,18 @@
 
           shellHook = ''
             echo "🛠️  Template development environment"
-            echo "Use 'nix flake init -t github:yourusername/flake-templates' to test templates"
+            echo "Use 'nix flake init -t github:sstitle/flake-templates' to test templates"
+            echo "Run 'nix fmt' to format all files."
           '';
         };
 
-        # Formatter for this flake
-        formatter = pkgs.nixpkgs-fmt;
+        # for `nix fmt`
+        formatter = treefmtEval.config.build.wrapper;
+
+        # for `nix flake check`
+        checks = {
+          formatting = treefmtEval.config.build.check self;
+        };
       }
     )
     // {
@@ -59,6 +66,7 @@
 
             Get started:
             1. Run `direnv allow` (if you have direnv installed)
+            2. Run `nix fmt` to format your code
             3. Run `mask --help` to see available tasks
             4. Run `treefmt` to format your code
 

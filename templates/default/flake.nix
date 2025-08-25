@@ -41,10 +41,10 @@
           '';
         };
 
-        # Formatter
+        # for `nix fmt`
         formatter = treefmtEval.config.build.wrapper;
 
-        # Checks
+        # for `nix flake check`
         checks = {
           formatting = treefmtEval.config.build.check self;
         };
