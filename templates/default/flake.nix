@@ -2,7 +2,7 @@
   description = "Development environment with nickel and mask";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
@@ -18,7 +18,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        treefmtEval = treefmt-nix.lib.evalModule pkgs ./nix/treefmt.nix;
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {
         # Development shell with nickel and mask
