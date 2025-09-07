@@ -3,37 +3,44 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      treefmt-nix,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        treefmtEval = treefmt-nix.lib.evalModule pkgs ./templates/default/treefmt.nix;
-      in
-      {
+    inputs@{ self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
-        # for `nix fmt`
-        formatter = treefmtEval.config.build.wrapper;
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          system,
+          ...
+        }:
+        let
+          treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./templates/default/treefmt.nix;
+        in
+        {
+          # for `nix fmt`
+          formatter = treefmtEval.config.build.wrapper;
 
-        # for `nix flake check`
-        checks = {
-          formatting = treefmtEval.config.build.check self;
+          # for `nix flake check`
+          checks = {
+            formatting = treefmtEval.config.build.check self;
+          };
         };
-      }
-    )
-    // {
+
       # Templates that can be used with 'nix flake init'
-      templates = {
+      flake.templates = {
         default = {
           path = ./templates/default;
           description = "Development environment with nickel, mask, and treefmt";
@@ -57,13 +64,6 @@
             Happy coding! 🚀
           '';
         };
-
-        # You can add more templates here in the future
-        # minimal = {
-        #   path = ./templates/minimal;
-        #   description = "Minimal Nix development environment";
-        # };
       };
-
     };
 }
