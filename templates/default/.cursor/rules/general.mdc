@@ -1,0 +1,8 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+- This repo is managed by a Nix flake in `flake.nix`, this file provides a devShell and set of packages and apps
+- This repo uses the 'mask' dependency from the devShell and a `maskfile.md` file which provides a quick way to add convenient scripts for the repo to a central location
