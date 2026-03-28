@@ -15,6 +15,5 @@ echo "Hello World!"
 > Run nix-unit tests
 
 ```bash
-system=$(nix eval --impure --raw --expr 'builtins.currentSystem')
-nix-unit --flake ".#legacyPackages.${system}.tests"
+nix-unit ./test.nix
 ```

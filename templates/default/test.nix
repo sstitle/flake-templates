@@ -1,33 +1,37 @@
-{ lib }:
 {
-  "lib.strings" = {
-    "toUpper converts string to uppercase" = {
-      expr = lib.toUpper "hello world";
-      expected = "HELLO WORLD";
-    };
-
-    "concatStringsSep joins with separator" = {
-      expr = lib.concatStringsSep ", " [
-        "foo"
-        "bar"
-        "baz"
-      ];
-      expected = "foo, bar, baz";
-    };
+  testAddition = {
+    expr = 1 + 1;
+    expected = 2;
   };
 
-  "lib.lists" = {
-    "filter keeps matching elements" = {
-      expr = lib.filter (x: x > 2) [
-        1
-        2
-        3
-        4
-      ];
-      expected = [
-        3
-        4
-      ];
-    };
+  testStringConcatenation = {
+    expr = "hello" + " " + "world";
+    expected = "hello world";
+  };
+
+  testListFilter = {
+    expr = builtins.filter (x: x > 2) [
+      1
+      2
+      3
+      4
+    ];
+    expected = [
+      3
+      4
+    ];
+  };
+
+  testMap = {
+    expr = map (x: x * 2) [
+      1
+      2
+      3
+    ];
+    expected = [
+      2
+      4
+      6
+    ];
   };
 }

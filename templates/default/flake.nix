@@ -34,8 +34,6 @@
         {
           devShells.default = import ./shell.nix { inherit pkgs; };
 
-          legacyPackages.tests = import ./test.nix { inherit (pkgs) lib; };
-
           # for `nix fmt`
           formatter = treefmtEval.config.build.wrapper;
 
@@ -44,5 +42,7 @@
             formatting = treefmtEval.config.build.check self;
           };
         };
+
+      flake.tests = import ./test.nix;
     };
 }
