@@ -28,7 +28,6 @@ A collection of Nix flake templates for quickly bootstrapping development enviro
 
 A comprehensive development environment featuring:
 
-- **Nickel**: Configuration language for maintainable configs
 - **Mask**: Task runner for automating development workflows
 - **Treefmt**: Multi-language code formatter
 - **Direnv**: Automatic environment loading
@@ -90,7 +89,6 @@ Once you've initialized a project with the template:
 
 The template includes a comprehensive development shell with:
 
-- Nickel configuration language
 - Mask task runner
 - Treefmt formatter
 - Git and direnv tools
@@ -167,7 +165,6 @@ templates = {
 ## Related Projects
 
 - [Nix](https://nixos.org/) - The Nix package manager
-- [Nickel](https://nickel-lang.org/) - Configuration language
 - [Mask](https://github.com/jacobdeichert/mask) - Task runner
 - [Treefmt](https://github.com/numtide/treefmt) - Code formatter
 - [Direnv](https://direnv.net/) - Environment management

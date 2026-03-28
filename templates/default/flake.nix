@@ -1,5 +1,5 @@
 {
-  description = "Development environment with nickel and mask";
+  description = "Development environment with 'mask' task runner and 'treefmt' code formatter";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";

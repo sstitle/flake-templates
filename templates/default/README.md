@@ -1,6 +1,6 @@
 # Project Name
 
-A Nix-based development environment with nickel and mask.
+A Nix-based development environment with 'mask' task runner.
 
 <!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
 
@@ -40,7 +40,6 @@ A Nix-based development environment with nickel and mask.
 
 This development environment includes:
 
-- **nickel**: Configuration language for writing maintainable configuration files
 - **mask**: Task runner for automating common development tasks
 - **treefmt**: Multi-language code formatter
 - **git**: Version control
