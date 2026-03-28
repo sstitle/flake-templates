@@ -2,7 +2,7 @@
   description = "Nix flake templates for development environments";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
@@ -11,10 +11,12 @@
     inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
+        # keep-sorted start
         "x86_64-linux"
         "aarch64-linux"
         "x86_64-darwin"
         "aarch64-darwin"
+        # keep-sorted end
       ];
 
       perSystem =
@@ -30,6 +32,8 @@
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./templates/default/treefmt.nix;
         in
         {
+          devShells.default = import ./shell.nix { inherit pkgs; };
+
           # for `nix fmt`
           formatter = treefmtEval.config.build.wrapper;
 
@@ -43,12 +47,11 @@
       flake.templates = {
         default = {
           path = ./templates/default;
-          description = "Development environment with nickel, mask, and treefmt";
+          description = "Development environment with 'mask' task runner, and 'treefmt' code formatter";
           welcomeText = ''
             # Welcome to your new Nix development environment!
 
             This template provides:
-            - Nickel configuration language
             - Mask task runner
             - Treefmt code formatter
             - Automatic environment loading with direnv
