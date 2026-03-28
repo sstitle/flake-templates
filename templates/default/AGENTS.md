@@ -15,8 +15,8 @@ All development follows **red-green** test-driven development:
 
 1. **Red** — write a failing `nix-unit` test in `test.nix` that specifies the desired
    behavior before writing any implementation.
-2. **Green** — write the minimal implementation to make the test pass.
-3. **Refactor** — clean up the implementation while keeping tests green.
+1. **Green** — write the minimal implementation to make the test pass.
+1. **Refactor** — clean up the implementation while keeping tests green.
 
 Never write implementation code without a corresponding failing test first.
 
