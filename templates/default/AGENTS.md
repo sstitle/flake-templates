@@ -13,18 +13,23 @@
 
 All development follows **red-green** test-driven development:
 
-1. **Red** — write a failing `nix-unit` test in `test.nix` that specifies the desired
-   behavior before writing any implementation.
+1. **Red** — write a failing test that specifies the desired behavior before writing any
+   implementation.
 1. **Green** — write the minimal implementation to make the test pass.
 1. **Refactor** — clean up the implementation while keeping tests green.
 
-Never write implementation code without a corresponding failing test first.
+Never write implementation code without a corresponding failing test first, unless the
+code is not meaningfully testable (e.g. top-level glue/wiring, configuration, or
+one-off scripts). In those cases, note why tests were skipped.
+
+Use the unit testing framework appropriate for the language.
+
+- **Nix** — `nix-unit` test attributes must be prefixed with
+  `test` (e.g. `testMyFunction`). See https://github.com/nix-community/nix-unit
+- **Python** - `pytest`
 
 Run tests with:
 
 ```
 mask test
 ```
-
-Test attributes must be prefixed with `test` (e.g. `testMyFunction`) for nix-unit to
-discover them. See https://github.com/nix-community/nix-unit
