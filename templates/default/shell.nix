@@ -1,10 +1,12 @@
 { pkgs, ... }:
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    # Core tools
+    # keep-sorted start
     git
     mask
     nix-unit
+    uv
+    # keep-sorted end
   ];
 
   shellHook = ''

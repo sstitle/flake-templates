@@ -60,7 +60,7 @@
             Make sure you have "direnv" installed in your NixOS configuration.
 
             Get started:
-            
+
             1. Run `direnv allow` (if you have direnv installed)
             2. Run `nix fmt` to format your code
             3. Run `mask --help` to see available tasks
